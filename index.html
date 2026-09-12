@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090b" />
+  <title>Trivia Duel</title>
+  <meta name="description" content="A fast 1v1 multiplayer trivia game for friends." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">⚡ Trivia Duel</div>
+      <button id="langBtn" class="ghost compact" aria-label="Change language">العربية</button>
+    </header>
+
+    <section id="home" class="screen card">
+      <div class="eyebrow" data-i18n="eyebrow">FRIEND VS FRIEND</div>
+      <h1 data-i18n="heroTitle">Think fast. Beat your friend.</h1>
+      <p class="lead" data-i18n="heroSub">Create a private room, share the code, and battle across three quick trivia rounds.</p>
+
+      <label data-i18n="nameLabel">Your name</label>
+      <input id="nameInput" maxlength="18" autocomplete="nickname" placeholder="Tareq" />
+
+      <div class="home-actions">
+        <button id="createBtn" class="primary" data-i18n="create">Create Challenge</button>
+        <div class="or" data-i18n="or">OR</div>
+        <div class="join-row">
+          <input id="roomInput" maxlength="6" placeholder="ROOM CODE" />
+          <button id="joinBtn" class="secondary" data-i18n="join">Join</button>
+        </div>
+      </div>
+      <p id="homeError" class="error"></p>
+    </section>
+
+    <section id="setup" class="screen card hidden">
+      <div class="eyebrow" data-i18n="gameSetup">GAME SETUP</div>
+      <h2 data-i18n="chooseGame">Choose your battle</h2>
+
+      <div class="setting-block">
+        <div class="setting-title" data-i18n="category">Category</div>
+        <div id="categoryChips" class="chips"></div>
+      </div>
+
+      <div class="setting-block">
+        <div class="setting-title" data-i18n="difficulty">Difficulty</div>
+        <div id="difficultyChips" class="chips"></div>
+      </div>
+
+      <div class="setting-grid">
+        <div class="mini-card">
+          <span data-i18n="rounds">Rounds</span>
+          <strong>Best of 3</strong>
+        </div>
+        <div class="mini-card">
+          <span data-i18n="questions">Questions</span>
+          <strong>5 / round</strong>
+        </div>
+        <div class="mini-card">
+          <span data-i18n="timer">Timer</span>
+          <strong>15 sec</strong>
+        </div>
+        <div class="mini-card">
+          <span data-i18n="scoring">Scoring</span>
+          <strong data-i18n="speedBonus">Speed bonus</strong>
+        </div>
+      </div>
+
+      <button id="confirmSetupBtn" class="primary" data-i18n="createRoom">Create Room</button>
+      <button id="backHomeBtn" class="ghost" data-i18n="back">Back</button>
+    </section>
+
+    <section id="lobby" class="screen card hidden">
+      <div class="eyebrow" data-i18n="privateRoom">PRIVATE ROOM</div>
+      <h2 data-i18n="sendCode">Send this code to your friend</h2>
+      <button id="copyCodeBtn" class="room-code" title="Copy room code"></button>
+      <p class="muted center" data-i18n="tapCopy">Tap the code to copy it</p>
+
+      <div id="lobbyPlayers" class="scoreboard"></div>
+      <div id="lobbySettings" class="lobby-settings"></div>
+      <p id="waitingText" class="status"></p>
+
+      <button id="startBtn" class="primary hidden" data-i18n="startBattle">Start Battle ⚔️</button>
+      <button id="leaveLobbyBtn" class="ghost" data-i18n="leave">Leave</button>
+    </section>
+
+    <section id="game" class="screen card hidden">
+      <div class="battle-head">
+        <div>
+          <div id="roundLabel" class="eyebrow"></div>
+          <div id="questionLabel" class="muted"></div>
+        </div>
+        <div id="streakBadge" class="streak hidden">🔥 0</div>
+      </div>
+
+      <div id="gamePlayers" class="scoreboard compact-board"></div>
+
+      <div class="timer-track"><div id="timerBar" class="timer-bar"></div></div>
+
+      <div class="question-card">
+        <div id="questionText" class="question"></div>
+        <div id="answers" class="answers"></div>
+      </div>
+
+      <p id="gameStatus" class="status"></p>
+    </section>
+
+    <section id="roundResult" class="screen card hidden">
+      <div class="result-icon">⚔️</div>
+      <div class="eyebrow" data-i18n="roundComplete">ROUND COMPLETE</div>
+      <h2 id="roundWinnerText"></h2>
+      <div id="roundPlayers" class="scoreboard"></div>
+      <button id="nextRoundBtn" class="primary hidden" data-i18n="nextRound">Next Round</button>
+    </section>
+
+    <section id="final" class="screen card hidden">
+      <div class="result-icon">🏆</div>
+      <div class="eyebrow" data-i18n="matchComplete">MATCH COMPLETE</div>
+      <h1 id="winnerText"></h1>
+      <p id="winnerSub" class="lead center"></p>
+      <div id="finalPlayers" class="scoreboard"></div>
+      <button id="rematchBtn" class="primary hidden" data-i18n="rematch">Rematch 🔥</button>
+      <button id="leaveFinalBtn" class="ghost" data-i18n="leaveRoom">Leave Room</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
